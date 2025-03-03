@@ -17,22 +17,22 @@ public class Livro implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer livroId;
 	private String titulo;
 	private String nomeAutor;
 	private String texto;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoria_id")
+	@JoinColumn(name = "categoriaId")
 	private Categoria categoria;
 
 	public Livro() {
 		super();
 	}
 
-	public Livro(Integer id, String titulo, String nomeAutor, String texto, Categoria categoria) {
+	public Livro(Integer livroId, String titulo, String nomeAutor, String texto, Categoria categoria) {
 		super();
-		this.id = id;
+		this.livroId = livroId;
 		this.titulo = titulo;
 		this.nomeAutor = nomeAutor;
 		this.texto = texto;
@@ -40,11 +40,11 @@ public class Livro implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return livroId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer livroId) {
+		this.livroId = livroId;
 	}
 
 	public String getTitulo() {
@@ -81,7 +81,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(livroId);
 	}
 
 	@Override
@@ -93,7 +93,8 @@ public class Livro implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Livro other = (Livro) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(livroId, other.livroId);
 	}
+
 	
 }
