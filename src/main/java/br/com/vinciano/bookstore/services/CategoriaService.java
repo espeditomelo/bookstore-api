@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.vinciano.bookstore.domain.Categoria;
 import br.com.vinciano.bookstore.repositories.CategoriaRepository;
+import br.com.vinciano.bookstore.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,7 +17,7 @@ public class CategoriaService {
 	
 	public Categoria findById(Integer categoriaId) {
 		Optional<Categoria> obj = categoriaRepository.findById(categoriaId);
-		return obj.orElse(null);		
+		return obj.orElseThrow( () -> new ObjectNotFoundException("Objecto não encontrato. Id: " + categoriaId + " Tipo: " + Categoria.class.getName() ));		
 	}
 
 }
