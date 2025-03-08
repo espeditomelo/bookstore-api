@@ -1,5 +1,6 @@
 package br.com.vinciano.bookstore.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class CategoriaService {
 	public Categoria findById(Integer categoriaId) {
 		Optional<Categoria> obj = categoriaRepository.findById(categoriaId);
 		return obj.orElseThrow( () -> new ObjectNotFoundException("Objecto não encontrato. Id: " + categoriaId + " Tipo: " + Categoria.class.getName() ));		
+	}
+	
+	public List<Categoria> findAll(){
+		return categoriaRepository.findAll();
 	}
 
 }
