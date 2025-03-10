@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vinciano.bookstore.domain.Categoria;
+import br.com.vinciano.bookstore.dtos.CategoriaDTO;
 import br.com.vinciano.bookstore.repositories.CategoriaRepository;
 import br.com.vinciano.bookstore.services.exceptions.ObjectNotFoundException;
 
@@ -25,4 +26,15 @@ public class CategoriaService {
 		return categoriaRepository.findAll();
 	}
 
+	public Categoria create(Categoria obj) {
+		obj.setId(null);
+		return categoriaRepository.save(obj);
+	}
+
+	public Categoria update(Integer categoriaId, CategoriaDTO objDTO) {
+		Categoria obj = findById(categoriaId);
+		obj.setNome(objDTO.getNome());
+		obj.setDescricao(objDTO.getDescricao());
+		return categoriaRepository.save(obj);		
+	}
 }
