@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.vinciano.bookstore.domain.Categoria;
 import br.com.vinciano.bookstore.dtos.CategoriaDTO;
 import br.com.vinciano.bookstore.repositories.CategoriaRepository;
+import br.com.vinciano.bookstore.services.exceptions.DataIntegrityViolationException;
 import br.com.vinciano.bookstore.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -36,5 +37,14 @@ public class CategoriaService {
 		obj.setNome(objDTO.getNome());
 		obj.setDescricao(objDTO.getDescricao());
 		return categoriaRepository.save(obj);		
+	}
+
+	public void delete(Integer categoriaId) {
+		findById(categoriaId);
+		try {
+			categoriaRepository.deleteById(categoriaId);			
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Não da pra apagar a Categoria devido a mesma possuir livros.");
+		}
 	}
 }
