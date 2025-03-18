@@ -44,7 +44,7 @@ public class CategoriaService {
 		try {
 			categoriaRepository.deleteById(categoriaId);			
 		} catch (org.springframework.dao.DataIntegrityViolationException e) {
-			throw new DataIntegrityViolationException("Não da pra apagar a Categoria devido a mesma possuir livros.");
+			throw new DataIntegrityViolationException("Não da pra apagar a Categoria devido a mesma possuir licroivros.");
 		}
 	}
 }

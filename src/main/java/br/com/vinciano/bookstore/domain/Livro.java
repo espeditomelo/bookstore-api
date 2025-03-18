@@ -16,37 +16,37 @@ import jakarta.persistence.ManyToOne;
 public class Livro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer livroId;
 	private String titulo;
 	private String nomeAutor;
-	private String texto;
+	private String text;
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoriaId")
 	private Categoria categoria;
-
+	
 	public Livro() {
 		super();
 	}
 
-	public Livro(Integer livroId, String titulo, String nomeAutor, String texto, Categoria categoria) {
+	public Livro(Integer livroId, String titulo, String nomeAutor, String text, Categoria categoria) {
 		super();
 		this.livroId = livroId;
 		this.titulo = titulo;
 		this.nomeAutor = nomeAutor;
-		this.texto = texto;
+		this.text = text;
 		this.categoria = categoria;
 	}
 
-	public Integer getId() {
+	public Integer getLivroId() {
 		return livroId;
 	}
 
-	public void setId(Integer livroId) {
+	public void setLivroId(Integer livroId) {
 		this.livroId = livroId;
 	}
 
@@ -66,12 +66,12 @@ public class Livro implements Serializable {
 		this.nomeAutor = nomeAutor;
 	}
 
-	public String getTexto() {
-		return texto;
+	public String getText() {
+		return text;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public Categoria getCategoria() {
@@ -99,5 +99,4 @@ public class Livro implements Serializable {
 		return Objects.equals(livroId, other.livroId);
 	}
 
-	
 }

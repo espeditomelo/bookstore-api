@@ -17,7 +17,6 @@ public class CategoriaDTO implements Serializable {
 
 	public CategoriaDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CategoriaDTO(Categoria obj) {
