@@ -19,14 +19,6 @@ public class TestConfig {
     	dbService.instanciaBaseDeDados();
     	return false;
     }
-    
-//    public CommandLineRunner instanciaBaseDeDados() {
-//		return args -> {
-//			this.dbService.instanciaBaseDeDados();
-//			System.out.println("BD Iniciado!");
-//		};
-//	}
-    
-    
+       
 
 }
