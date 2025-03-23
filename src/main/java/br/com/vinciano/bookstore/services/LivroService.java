@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.vinciano.bookstore.domain.Categoria;
 import br.com.vinciano.bookstore.domain.Livro;
 import br.com.vinciano.bookstore.dtos.LivroDTO;
 import br.com.vinciano.bookstore.dtos.LivroResumidoDTO;
@@ -46,6 +47,16 @@ public class LivroService {
 		obj.setTitulo(objAtualizado.getTitulo());
 		obj.setText(objAtualizado.getText());		
 	}
+	
+	public Livro create(Integer categoriaId, Livro obj) {
+		
+		Categoria categoria = categoriaService.findById(categoriaId);		
+		obj.setLivroId(null);
+		obj.setCategoria(categoria);		
+		return livroRepository.save(obj);
+		
+	}
+
 	
 	
 }
