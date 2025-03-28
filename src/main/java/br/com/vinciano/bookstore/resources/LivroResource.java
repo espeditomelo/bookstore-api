@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,9 @@ import br.com.vinciano.bookstore.domain.Livro;
 import br.com.vinciano.bookstore.dtos.LivroDTO;
 import br.com.vinciano.bookstore.dtos.LivroResumidoDTO;
 import br.com.vinciano.bookstore.services.LivroService;
+import jakarta.validation.Valid;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/livros")
 public class LivroResource {
@@ -45,14 +48,14 @@ public class LivroResource {
 	}
 
 	@PutMapping(value = "/{livroId}")
-	public ResponseEntity<Livro> update(@PathVariable Integer livroId, @RequestBody Livro obj) {
+	public ResponseEntity<Livro> update(@PathVariable Integer livroId, @Valid @RequestBody Livro obj) {
 		Livro objAtualizado = livroService.update(livroId, obj);
 		return ResponseEntity.ok().body(objAtualizado);
 	}
 
 	@PostMapping
 	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer categoriaId,
-			@RequestBody Livro obj) {
+			@Valid @RequestBody Livro obj) {
 		Livro newObj = livroService.create(categoriaId, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{livroId}")
 				.buildAndExpand(newObj.getLivroId()).toUri();
@@ -60,10 +63,10 @@ public class LivroResource {
 	}
 
 	@DeleteMapping(value = "/{livroId}")
-	public ResponseEntity<Void> delete(@PathVariable Integer livroId){
+	public ResponseEntity<Void> delete(@PathVariable Integer livroId) {
 
 		livroService.delete(livroId);
-		
+
 		return ResponseEntity.noContent().build();
 	}
 

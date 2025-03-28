@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Categoria implements Serializable {
@@ -21,7 +24,13 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer categoriaId;
+	
+	@NotEmpty(message = "O Nome da Categoria é requerido")
+	@Length(min = 3, max = 50, message = "O Nome da Categoria deve ter entre 3 e 50 caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "A Descricao da Categoria é requerido")
+	@Length(min = 3, max = 50, message = "A Descricao da Categoria deve ter entre 3 e 50 caracteres")
 	private String descricao;
 	
 	@JsonIgnore

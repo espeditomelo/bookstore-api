@@ -3,6 +3,8 @@ package br.com.vinciano.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable {
@@ -20,8 +23,17 @@ public class Livro implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer livroId;
+	
+	@NotEmpty(message = "O Titulo é requerido")
+	@Length(min = 3, max = 50, message = "O Titulo deve ter entre 3 e 50 caracteres")
 	private String titulo;
+	
+	@NotEmpty(message = "O Nome do Autor é requerido")
+	@Length(min = 3, max = 50, message = "O Nome do Autor deve ter entre 3 e 50 caracteres")
 	private String nomeAutor;
+	
+	@NotEmpty(message = "O Texto do livro é requerido")
+	@Length(min = 3, max = 50, message = "O Texto deve ter entre 3 e 200 caracteres")
 	private String text;
 	
 	@JsonIgnore
